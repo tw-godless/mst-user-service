@@ -37,4 +37,9 @@ public class UserServiceImpl implements UserService {
                 .privileges(role.getPrivileges().stream().map(Privilege::getSymbol).collect(toList()))
                 .build();
     }
+
+    @Override
+    public User getUserAddress(String userName) {
+        return userRepository.findByName(userName);
+    }
 }

@@ -29,6 +29,8 @@ public class User implements Serializable {
     @JoinColumn(name = "role")
     private Role role;
 
+    private String address;
+
     public User() {
         id = StringUtils.uuid();
     }

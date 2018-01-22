@@ -10,6 +10,7 @@ buildscript {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
         classpath("gradle.plugin.com.boxfuse.client:flyway-release:4.2.0")
         classpath('org.junit.platform:junit-platform-gradle-plugin:1.0.2')
+        classpath "io.spring.gradle:dependency-management-plugin:0.5.6.RELEASE"
     }
 }
 
@@ -18,6 +19,7 @@ apply plugin: 'eclipse'
 apply plugin: "org.flywaydb.flyway"
 apply plugin: 'org.junit.platform.gradle.plugin'
 apply plugin: 'org.springframework.boot'
+apply plugin: "io.spring.dependency-management"
 
 group = 'com.thoughtworks'
 version = '0.0.1-SNAPSHOT'
@@ -28,8 +30,15 @@ repositories {
     maven { url 'https://jitpack.io' }
 }
 
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-consul-dependencies:1.2.1.RELEASE"
+    }
+}
+
 
 dependencies {
+    compile('org.springframework.cloud:spring-cloud-starter-consul-all')
     compile('org.springframework.boot:spring-boot-starter-actuator')
     compile('org.springframework.boot:spring-boot-starter-security')
     compile('org.springframework.boot:spring-boot-starter-web')
